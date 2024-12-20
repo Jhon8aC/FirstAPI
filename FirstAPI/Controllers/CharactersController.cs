@@ -51,7 +51,7 @@ namespace FirstAPI.Controllers
         [HttpPut]
         // added by Developer
         [Route("{id:guid}")]
-        public IActionResult upDateCharacter(Guid id, UpDateCharacterDto UpdateCharacterDto)
+        public IActionResult upDateCharacter(Guid id, UpdateCharacterDto UpdateCharacterDto)
         {
             var character = dbContext.Characters.Find(id);
             if (character == null)

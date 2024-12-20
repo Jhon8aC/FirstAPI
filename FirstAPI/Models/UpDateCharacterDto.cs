@@ -1,6 +1,6 @@
 ﻿namespace FirstAPI.Models
 {
-    public class UpDateCharacterDto
+    public class UpdateCharacterDto
     {
         public required string Name { get; set; }
         public required int Health { get; set; }
