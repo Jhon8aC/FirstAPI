@@ -11,6 +11,7 @@ namespace FirstAPI.Controllers
     [ApiController]
     public class CharactersController : ControllerBase
     {
+        // hi
         public string chact = "IronMan";
         private readonly ApplicationDbContext dbContext;
         public CharactersController(ApplicationDbContext dbContext)
@@ -62,5 +63,6 @@ namespace FirstAPI.Controllers
             dbContext.SaveChanges();
             return Ok(character);   
             }
+
     }
 }
