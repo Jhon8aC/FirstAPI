@@ -49,6 +49,7 @@ namespace FirstAPI.Controllers
             return Ok(characterEntity);
         }
         [HttpPut]
+        // added
         [Route("{id:guid}")]
         public IActionResult upDateCharacter(Guid id, UpDateCharacterDto UpdateCharacterDto)
         {
