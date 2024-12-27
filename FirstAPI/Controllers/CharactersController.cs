@@ -11,22 +11,23 @@ namespace FirstAPI.Controllers
     [ApiController]
     public class CharactersController : ControllerBase
     {
-        // hi
-        public string chact = "IronMan";
         private readonly ApplicationDbContext dbContext;
         public CharactersController(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
+        // Get all characters
         [HttpGet]
         public IActionResult GetAllCharacters()
         {
             var AllCharacters = dbContext.Characters.ToList();
             return Ok(AllCharacters);
         }
+        // Get characters by id
         [HttpGet]
         [Route("{id:guid}")]
-        public IActionResult GetCharacterById(Guid id) {
+        public IActionResult GetCharacterById(Guid id)
+        {
             var character = dbContext.Characters.Find(id);
             if (character == null)
             {
@@ -34,10 +35,12 @@ namespace FirstAPI.Controllers
             }
             return Ok(character);
         }
+        // Add characters
         [HttpPost]
-        public IActionResult addCharacter(AddCharacterDto addCharacterDto)
+        public IActionResult AddCharacter(AddCharacterDto addCharacterDto)
         {
-            var characterEntity = new Character() {
+            var characterEntity = new Character()
+            {
                 Name = addCharacterDto.Name,
                 Superpower = addCharacterDto.Superpower,
                 Health = addCharacterDto.Health,
@@ -48,10 +51,10 @@ namespace FirstAPI.Controllers
             dbContext.SaveChanges();
             return Ok(characterEntity);
         }
+        // Update characters
         [HttpPut]
-        // added by Developer
         [Route("{id:guid}")]
-        public IActionResult upDateCharacter(Guid id, UpdateCharacterDto UpdateCharacterDto)
+        public IActionResult UpdateCharacter(Guid id, UpdateCharacterDto UpdateCharacterDto)
         {
             var character = dbContext.Characters.Find(id);
             if (character == null)
@@ -62,9 +65,23 @@ namespace FirstAPI.Controllers
             character.Superpower = UpdateCharacterDto.Superpower;
             character.Health = UpdateCharacterDto.Health;
             dbContext.SaveChanges();
-            return Ok(character);   
+            return Ok(character);
+        }
+        // Delete characters
+        [HttpDelete]
+        [Route("{id:guid}")]
+        public IActionResult DeleteCharacter(Guid id)
+        {
+            var character = dbContext.Characters.Find(id);
+            if (character == null)
+            {
+                return NotFound();
             }
+            dbContext.Characters.Remove(character);
+            dbContext.SaveChanges();
+            return Ok("Removed successful");
 
+        }
     }
 }
 // Trying something
